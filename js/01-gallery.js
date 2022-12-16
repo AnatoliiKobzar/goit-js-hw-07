@@ -23,6 +23,9 @@ let instance = '';
 
 function onImgGalleryClick(event) {
   event.preventDefault();
+  if (!event.target.classList.contains('gallery__image')) {
+    return;
+  }
   window.addEventListener('keydown', onEscKeyPress);
   instance = basicLightbox.create(`<img src="${event.target.parentNode.href}">`);
   instance.show();
