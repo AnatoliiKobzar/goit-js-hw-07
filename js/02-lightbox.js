@@ -9,7 +9,7 @@ const markup = galleryItems
   .map(
     ({ preview, original, description }) => `<div class="gallery__item">
    <a class="gallery__item" href="${original}">
-  <img class="gallery__image" src="${preview}" alt="${description}" title="${description}" />
+  <img class="gallery__image" src="${preview}" alt="${description}"/>
 </a>
     </div>`
   )
@@ -19,7 +19,9 @@ galleryEl.insertAdjacentHTML('beforeend', markup);
 galleryEl.addEventListener('click', onImgGalleryClick);
 
 var lightbox = new SimpleLightbox('.gallery a', {
-  /* options */
+  captionsData: 'alt',
+  captionDelay: '250',
+  scrollZoom: false,
 });
 
 function onImgGalleryClick(event) {
@@ -27,5 +29,4 @@ function onImgGalleryClick(event) {
   if (!event.target.classList.contains('gallery__image')) {
     return;
   }
-  show.lightbox();
 }
