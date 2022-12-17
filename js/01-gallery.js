@@ -26,14 +26,20 @@ function onImgGalleryClick(event) {
   if (!event.target.classList.contains('gallery__image')) {
     return;
   }
-  window.addEventListener('keydown', onEscKeyPress);
-  instance = basicLightbox.create(`<img src="${event.target.parentNode.href}">`);
+  instance = basicLightbox.create(`<img src="${event.target.parentNode.href}">`, {
+    onShow: instance => {
+      window.addEventListener('keydown', onEscKeyPress);
+    },
+
+    onClose: instance => {
+      window.removeEventListener('keydown', onEscKeyPress);
+    },
+  });
   instance.show();
 }
 
 function onEscKeyPress(event) {
   if (event.code === 'Escape') {
     instance.close();
-    window.removeEventListener('keydown', onEscKeyPress);
   }
 }
